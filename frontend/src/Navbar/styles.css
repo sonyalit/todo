@@ -1,0 +1,8 @@
+.nav{
+    display: inline-flex;
+    height:50px;
+    width:100vw;
+    background-color: skyblue;
+    justify-content: space-around;
+    align-items: center;
+}
