@@ -56,7 +56,7 @@ router.get('/pages', async (req, res) => {
 });
 router.put('/edit/:id', async (req, res) => {
   const { id } = req.params;
-  const user = res.locals;
+  const { user } = res.locals;
   const { newTitle } = req.body;
   try {
     if (user) {
@@ -74,7 +74,7 @@ router.put('/edit/:id', async (req, res) => {
 });
 router.put('/toggle/:id', async (req, res) => {
   const { id } = req.params;
-  const user = res.locals;
+  const { user } = res.locals;
   try {
     if (user) {
       const todo = await Todo.findOne({

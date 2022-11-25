@@ -2,9 +2,6 @@ const { User } = require('../db/models');
 
 // локальные переменные
 const resLocals = (req, res, next) => {
-  if (req.session.adminId) {
-    res.locals.userId = req.session.adminId;
-  }
   res.locals.userId = req.session.userId;
   next();
 };
