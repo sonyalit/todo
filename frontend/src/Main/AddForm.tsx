@@ -24,7 +24,7 @@ function AddForm({ payload }:{ payload:Tpayload }): JSX.Element {
   function handleName(event: React.ChangeEvent<HTMLInputElement>): void {
     setName(event.target.value);
   }
-  const addTodo = (event: React.FormEvent): void => {
+  const addTodo = async (event: React.FormEvent): Promise<void> => {
     event.preventDefault();
 
     const isValid = todo && email;
@@ -37,7 +37,7 @@ function AddForm({ payload }:{ payload:Tpayload }): JSX.Element {
       title: todo,
       isDone: false,
     };
-    dispatch(addNewTodo(data));
+    await dispatch(addNewTodo(data));
     setEmail('');
     setTodo('');
     setName('');
