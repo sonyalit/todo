@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useAppDispatch } from '../store';
-import { addNewTodo, getPages, getTodos } from './todoSlice';
+import { addNewTodo, getPages, getTodos, resetMessage } from './todoSlice';
 import { NewTodo, Tpayload } from './types';
 import './styles.css';
 import { RootState } from '../types';
@@ -43,6 +43,13 @@ function AddForm({ payload }:{ payload:Tpayload }): JSX.Element {
     setTodo('');
     setName('');
   };
+  useEffect(() => {
+    const id = setTimeout(() => {
+      dispatch(resetMessage());
+    }, 5000);
+    return () => clearTimeout(id);
+  }, [message, dispatch]);
+
 
   return (
     <form className="addform" onSubmit={addTodo}>
