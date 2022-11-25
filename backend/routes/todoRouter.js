@@ -23,13 +23,13 @@ router.post('/', async (req, res) => {
   try {
     if (params.sort) {
       todos = await Todo.findAll({
-        offset: params.page === 1 ? 0 : (params.page - 1) * 3,
+        offset: params.page <= 1 ? 0 : (params.page - 1) * 3,
         limit: 3,
         order: [[params.sort, 'ASC']],
       });
     } else {
       todos = await Todo.findAll({
-        offset: params.page === 1 ? 0 : (params.page - 1) * 3,
+        offset: params.page <= 1 ? 0 : (params.page - 1) * 3,
         limit: 3,
       });
     }
