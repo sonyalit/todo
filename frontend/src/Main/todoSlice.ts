@@ -95,6 +95,9 @@ const todoSlice = createSlice({
       const index = state.list.findIndex((todo) => todo.id === action.payload);
       state.list[index].edit = true;
     },
+    resetMessage: (state) => {
+      state.message = null;
+  },
   },
   extraReducers: (builder) => {
 builder
@@ -142,5 +145,5 @@ builder
 });
 
 export default todoSlice.reducer;
-export const { editTrue } = todoSlice.actions;
+export const { editTrue, resetMessage } = todoSlice.actions;
 export const getTodoList = (state: RootState): Todo[] => state.todos.list;

@@ -3,6 +3,9 @@ const { Todo } = require('../db/models');
 
 router.post('/new', async (req, res) => {
   const { todo } = req.body;
+  if (!todo.name || !todo.email || !todo.title) {
+    res.status(200).json({ message: 'Заполните все поля' });
+  }
   try {
     await Todo.create({
       name: todo.name,
