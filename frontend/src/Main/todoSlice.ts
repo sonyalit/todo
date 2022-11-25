@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { createAsyncThunk, createSelector, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../types';
 import {
  TodosState, Todo, Tpayload, NewTodo
@@ -14,7 +14,7 @@ const initialState: TodosState = {
 export const addNewTodo = createAsyncThunk(
   'newTodo/addnewTodo',
   (todo:NewTodo) => {
-    const fetchNewTodo = async (): Promise<string> => {
+    const fetchNewTodo = async (): Promise<any> => {
       const response = await fetch('/api/todos/new', {
         method: 'post',
         headers: {
@@ -23,7 +23,7 @@ export const addNewTodo = createAsyncThunk(
         body: JSON.stringify({ todo }),
       });
       const data = await response.json();
-      return data.message;
+      return data;
     };
     return fetchNewTodo();
   }
@@ -102,7 +102,8 @@ const todoSlice = createSlice({
   extraReducers: (builder) => {
 builder
 .addCase(addNewTodo.fulfilled, (state, action) => {
-  state.message = action.payload;
+  state.list.push(action.payload.newTodo);
+  state.message = action.payload.message;
 })
 .addCase(addNewTodo.rejected, (state, action) => {
   state.error = action.error.message;
@@ -146,4 +147,7 @@ builder
 
 export default todoSlice.reducer;
 export const { editTrue, resetMessage } = todoSlice.actions;
-export const getTodoList = (state: RootState): Todo[] => state.todos.list;
+export const getTodoList = createSelector(
+  (state:RootState) => state.todos.list,
+  (todos) => Object.values(todos)
+);
