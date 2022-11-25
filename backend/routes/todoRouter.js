@@ -7,7 +7,7 @@ router.post('/new', async (req, res) => {
     res.status(200).json({ message: 'Заполните все поля' });
   }
   try {
-    await Todo.create({
+    const newTodo = await Todo.create({
       name: todo.name,
       email: todo.email,
       title: todo.title,
@@ -15,7 +15,7 @@ router.post('/new', async (req, res) => {
       updatedByAdmin: false,
     });
 
-    res.status(200).json({ message: 'Задача добавлена' });
+    res.status(200).json({ newTodo, message: 'Задача добавлена' });
   } catch ({ message }) {
     res.status(400).json({ message });
   }
