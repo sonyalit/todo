@@ -37,13 +37,12 @@ function AddForm({ payload }:{ payload:Tpayload }): JSX.Element {
       title: todo,
       isDone: false,
     };
-
     dispatch(addNewTodo(data));
-    dispatch(getTodos(payload));
-    dispatch(getPages());
     setEmail('');
     setTodo('');
     setName('');
+    dispatch(getTodos(payload));
+    dispatch(getPages());
   };
   useEffect(() => {
     const id = setTimeout(() => {

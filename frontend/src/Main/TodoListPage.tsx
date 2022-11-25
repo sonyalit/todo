@@ -5,9 +5,9 @@ import { RootState } from '../types';
 import AddForm from './AddForm';
 import TodoCard from './TodoCard';
 import {
-  getTodoList,
   getTodos,
   getPages,
+  getTodoList,
 } from './todoSlice';
 import { Tpayload } from './types';
 
